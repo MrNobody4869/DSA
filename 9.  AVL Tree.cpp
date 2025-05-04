@@ -107,6 +107,68 @@ Node* insert(Node* node, string key, string meaning) {
     return node; // Return unchanged node
 }
 
+// Update a keyword meaning (same as insert for updating)
+Node* update(Node* node, string key, string meaning) {
+    return insert(node, key, meaning);
+}
+
+// Delete a keyword from the AVL tree
+Node* deleteNode(Node* root, string key) {
+    if (!root) return root;
+
+    // Perform standard BST delete
+    if (key < root->key)
+        root->left = deleteNode(root->left, key);
+    else if (key > root->key)
+        root->right = deleteNode(root->right, key);
+    else { // Found the node to be deleted
+        // Node with one child or no child
+        if (!root->left) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (!root->right) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Node with two children
+        Node* temp = root->right; // Get the inorder successor (smallest in the right subtree)
+        while (temp && temp->left) temp = temp->left;
+
+        root->key = temp->key;
+        root->meaning = temp->meaning;
+        root->right = deleteNode(root->right, temp->key); // Delete the inorder successor
+    }
+
+    // Update height
+    root->height = 1 + max(height(root->left), height(root->right));
+
+    // Get balance factor
+    int balance = getBalance(root);
+
+    // Perform rotations
+    if (balance > 1 && getBalance(root->left) >= 0)  // Left Left
+        return rightRotate(root);
+
+    if (balance > 1 && getBalance(root->left) < 0) {  // Left Right
+        root->left = leftRotate(root->left);
+        return rightRotate(root);
+    }
+
+    if (balance < -1 && getBalance(root->right) <= 0) {  // Right Right
+        return leftRotate(root);
+    }
+
+    if (balance < -1 && getBalance(root->right) > 0) {  // Right Left
+        root->right = rightRotate(root->right);
+        return leftRotate(root);
+    }
+
+    return root;
+}
+
 // Display in ascending order (in-order traversal)
 void displayAscending(Node* root) {
     if (root) {
@@ -152,10 +214,11 @@ int main() {
     do {
         cout << "\n--- AVL Tree Dictionary ---\n";
         cout << "1. Add/Update Keyword\n";
-        cout << "2. Display Ascending\n";
-        cout << "3. Display Descending\n";
-        cout << "4. Search Keyword\n";
-        cout << "5. Exit\n";
+        cout << "2. Delete Keyword\n";
+        cout << "3. Display Ascending\n";
+        cout << "4. Display Descending\n";
+        cout << "5. Search Keyword\n";
+        cout << "6. Exit\n";
         cout << "Enter choice: ";
         cin >> choice;
 
@@ -170,16 +233,22 @@ int main() {
                 break;
 
             case 2:
+                cout << "Enter keyword to delete: ";
+                cin >> key;
+                root = deleteNode(root, key);
+                break;
+
+            case 3:
                 cout << "\nDictionary (Ascending Order):\n";
                 displayAscending(root);
                 break;
 
-            case 3:
+            case 4:
                 cout << "\nDictionary (Descending Order):\n";
                 displayDescending(root);
                 break;
 
-            case 4: {
+            case 5: {
                 cout << "Enter keyword to search: ";
                 cin >> key;
                 int comparisons = 0;
@@ -187,7 +256,7 @@ int main() {
                 break;
             }
 
-            case 5:
+            case 6:
                 cout << "Exiting...\n";
                 break;
 
@@ -195,7 +264,7 @@ int main() {
                 cout << "Invalid choice!\n";
         }
 
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
