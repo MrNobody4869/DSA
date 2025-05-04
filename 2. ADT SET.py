@@ -96,7 +96,8 @@ if __name__ == '__main__':
     main()
 
 #how to run:
-
+#copy the file address and open terminal, type cd ctrl+v press enter.
+#in directory, type python file_name.py and enter
 
 # --- Explanation of Concepts Used ---
 # 1. SetADT class models the abstract behavior of a mathematical set using Python's built-in set type.
