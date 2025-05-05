@@ -268,3 +268,82 @@ int main() {
 
     return 0;
 }
+
+
+/*
+THEORY OF CONCEPTS USED:
+Space and TIme complexity:
+Best, Avg, Worst is O(Log n) for all, search, insert, delete, update.
+for traversal (Asc/Desc) it is O(n) for all best, avg, worst
+
+1. AVL Tree (Adelson-Velsky and Landis Tree):
+   - A self-balancing Binary Search Tree (BST).
+   - After every insertion and deletion, it checks and restores balance using rotations.
+   - Balance factor = height(left subtree) - height(right subtree)
+     - Must always be in range [-1, 0, +1].
+
+2. Dictionary Using AVL:
+   - Each node stores a keyword (string) and its meaning.
+   - Efficient for operations like insertion, deletion, search, and update due to AVL balancing.
+
+3. Node Structure:
+   - Contains:
+     - `key`: keyword (string)
+     - `meaning`: string value
+     - `left` and `right`: child pointers
+     - `height`: used to compute balance factor for rotations
+
+4. Rotations (for balancing):
+   - **Right Rotation (LL Case):** Unbalanced due to insertion in left-left.
+   - **Left Rotation (RR Case):** Unbalanced due to insertion in right-right.
+   - **Left-Right Rotation (LR Case):** Left child is right-heavy.
+   - **Right-Left Rotation (RL Case):** Right child is left-heavy.
+
+5. Insert Operation:
+   - Follows BST logic.
+   - Updates height, checks balance factor.
+   - Performs rotations if tree becomes unbalanced.
+
+6. Delete Operation:
+   - Handles three cases:
+     - Node has no child.
+     - Node has one child.
+     - Node has two children (in-order successor is used).
+   - After deletion, height and balance are updated, and rotations are applied if needed.
+
+7. Update Operation:
+   - Same as insert: if key already exists, its meaning is updated.
+
+8. Traversals:
+   - **In-order Traversal (Ascending):** Displays dictionary in alphabetical order.
+   - **Reverse In-order (Descending):** Displays in reverse alphabetical order.
+
+9. Search Operation:
+   - BST-style recursive search.
+   - Counts number of key comparisons for performance analysis.
+
+10. Time Complexities:
+    - **Search/Insert/Delete:** O(log n) due to self-balancing.
+    - **Space Complexity:** O(n) for storing n nodes.
+
+11. Comparison Counting:
+    - Tracks number of comparisons during search.
+    - Useful to measure performance or efficiency.
+
+12. Menu-Driven Program:
+    - Allows interactive operations:
+      - Add/update, delete, display ascending/descending, search, exit.
+
+APPLICATIONS:
+- Used in implementing dictionaries, databases, and auto-complete systems.
+- Suitable where dynamic insertion/deletion with fast look-up is required.
+
+NOTE:
+- AVL tree guarantees better worst-case performance than an unbalanced BST.
+- Ensure to use `cin.ignore()` before `getline()` to avoid input skipping.
+
+IMPROVEMENT TIPS:
+- Memory cleanup (free/delete tree on exit) can be added.
+- Case-insensitive comparison for user-friendliness (using `transform` to lowercase).
+*/
+
