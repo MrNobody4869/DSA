@@ -117,3 +117,63 @@ int main() {
 
     return 0;
 }
+
+
+
+/*
+THEORY OF CONCEPTS USED:
+
+1. Binary Search Tree (BST):
+   - A tree structure where each node has up to 2 children.
+   - Left child < Root < Right child.
+   - Efficient for search, insertion, and deletion in O(log n) average time.
+
+2. Optimal Binary Search Tree (OBST):
+   - A BST that minimizes the **expected search cost** based on access probabilities of keys.
+   - Goal: Build a BST where frequently accessed keys are placed nearer to the root.
+
+3. Expected Search Cost:
+   - The sum of each key's search probability × its depth in the tree.
+   - OBST minimizes this cost.
+
+4. Probability:
+   - Each key has a probability (given by the user) indicating how frequently it is accessed.
+   - Sum of all probabilities ≤ 1.
+
+5. Recursive Cost Calculation (optimalCost function):
+   - Calculates cost of all possible BSTs and selects the one with minimum cost.
+   - For each possible root `r` in a range `i` to `j`:
+     TotalCost = Cost(left subtree) + Cost(right subtree) + Sum of probabilities (i to j)
+   - This is a pure recursive solution and has **exponential time complexity**: O(2^n)
+
+6. Constructing the OBST (constructOBST function):
+   - Recursively chooses root with minimum total cost (calculated using optimalCost).
+   - Builds left and right subtrees using the same logic.
+
+7. Node Structure:
+   - Each node contains:
+     - `key`: the value stored
+     - `prob`: the probability of access
+     - `left` and `right`: pointers to children
+
+8. sumProb function:
+   - Helper function to compute sum of probabilities in range [i, j].
+
+9. printTree function:
+   - In-order traversal that visually prints the tree structure.
+   - Uses indentation and left/right labeling for readability.
+
+10. Time and Space Complexity:
+    - Current approach: Exponential time due to repeated subproblem calculations (no memoization).
+    - Space: O(n) for tree and recursion stack.
+    - Can be optimized to O(n^3) using Dynamic Programming (DP-based OBST).
+
+REAL-WORLD APPLICATIONS:
+- Efficient dictionary or database indexing where keys are not accessed uniformly.
+- Compiler symbol table optimization.
+- Data compression and encoding (like Huffman coding with additional constraints).
+
+IMPROVEMENT TIP:
+- Replace recursive `optimalCost` with a DP table to improve efficiency.
+*/
+
