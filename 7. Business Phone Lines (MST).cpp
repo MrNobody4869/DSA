@@ -156,3 +156,59 @@ int main() {
 
     return 0;
 }
+
+
+
+
+
+/*
+THEORY OF CONCEPTS USED:
+
+1. Graph:
+   - A data structure with vertices (cities) and edges (phone lines).
+   - Can be represented as adjacency matrix or adjacency list.
+
+2. Adjacency Matrix:
+   - 2D array where adj[i][j] = cost of edge from city i to j.
+   - If no direct edge, use a large value like INT32_MAX.
+   - Space Complexity: O(V^2), where V = number of cities.
+
+3. Minimum Spanning Tree (MST):
+   - A subset of edges that connects all vertices with minimum total cost and no cycles.
+   - Used here to find the cheapest way to connect all offices.
+
+4. Prim’s Algorithm:
+   - Greedy algorithm for finding MST.
+   - Starts from any vertex and keeps adding the smallest edge that connects to an unvisited vertex.
+   - Time Complexity: 
+     - O(V^2) with adjacency matrix
+     - O(E log V) with min-heap (not used here)
+   - Space Complexity: O(V + E)
+
+5. edge structure:
+   - Holds start city, end city, and weight (cost) of connection.
+
+6. vector<edge>:
+   - Dynamic array used to hold edges to explore (adjacent to current MST).
+
+7. Sorting (add_to_list function):
+   - Used to keep the edge list sorted by weight.
+   - Simple insertion method (bubble) to maintain increasing order.
+
+8. visited array:
+   - Boolean array to keep track of which cities are already connected to the MST.
+
+9. city_names array:
+   - Holds the names of the cities to match city codes with names for display.
+
+10. MST storage:
+    - `mst` array stores final selected edges in MST.
+    - `cost` keeps the total cost of building the network.
+
+WHY USE PRIM’S ALGORITHM:
+- Efficient for dense graphs (like office networks where many cities can be connected).
+- Always gives the optimal (minimum cost) result if edge weights are non-negative.
+
+REAL-LIFE USE:
+- Used in network design: laying out phone lines, internet cables, or road networks at minimum cost.
+*/
