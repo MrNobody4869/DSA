@@ -169,12 +169,52 @@ int main() {
 
 
 /*
+OVERALL TIME & SPACE COMPLEXITY:
+- Adding a city: O(1)
+- Adding a flight: O(1)
+
 -> Graph Class: Represents the flight network using a cities vector (a list of city names) and an adjList unordered map (the adjacency list). 
    The map connects city indices to the flight connections (edges).
+  - A data structure consisting of nodes (vertices) and connections (edges).
+  - Used to model relationships like cities and flights in this problem.
 
-+ addFlight: Adds a bidirectional flight (undirected edge) between two cities with a specified cost.
 
-+ isConnected: Uses a Depth-First Search (DFS) to check whether all cities are connected by flight paths.
+
+3. Adjacency List:
+   - A way to represent a graph where each node stores a list of connected nodes.
+   - Space-efficient for sparse graphs (few connections compared to total possible).
+   - Space Complexity: O(V + E), where V = number of cities, E = number of flights.
+
+4. Depth-First Search (DFS):
+   - A graph traversal algorithm that explores as far as possible along a branch before backtracking.
+   - Used here to check if the graph is connected.
+   - Time Complexity: O(V + E)
+   - Space Complexity: O(V) for visited array and call stack
+
+5. Connectivity in Graph:
+   - A graph is connected if there is a path between every pair of nodes.
+   - DFS from any node should visit all nodes in a connected graph.
+
+6. Edge (Flight):
+   - Represents a connection between two cities with a cost (fuel/time).
+   - Stored as a struct with destination index and cost.
+
+7. Vector:
+   - A dynamic array from the C++ STL (Standard Template Library).
+   - Used to store city names and adjacency lists.
+
+8. unordered_map:
+   - A hash table-based key-value data structure.
+   - Used to map city indices to their adjacency lists for fast access.
+   - Average Time Complexity: O(1) for insert and lookup
+
+9. Tuple (in main function):
+   - Temporarily used for holding flight data (source, destination, cost).
+   - Not essential but useful if extending functionality.
+
+10. Menu-Driven Program:
+    - A simple console interface that allows user interaction.
+    - Offers options like adding flights, checking connectivity, etc.
 
 Justification for Adjacency List:
 
