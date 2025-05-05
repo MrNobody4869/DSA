@@ -179,9 +179,66 @@ int main() {
 
 /*
 Concepts Used:
+
+TIME COMPLEXITY (for average case):
+-----------------------------------------------------------------------------------------
+- Insertion     : O(log n)
+- Deletion      : O(log n)
+- Search        : O(log n)
+- Update        : O(log n)
+- Inorder/Rev   : O(n)
+- Total space: O(log n) for avg and (n) for worst.
+
+Note: Worst case becomes O(n) when BST is unbalanced (linear chain of nodes)
+
 - Binary Search Tree: Efficient structure for insert/search/delete with O(log n) average time.
 - Recursion: For insertion, traversal, and deletion.
 - Stack memory usage minimized with iterative search/update/delete.
 - Traversals help in sorting data (inorder for ascending, reverse inorder for descending).
 - Comparison counting in search simulates worst-case time complexity analysis.
+
+/*
+- This program implements a dictionary using Binary Search Tree (BST).
+- Each node contains:
+  -> key (string) = keyword
+  -> value (string) = meaning
+  -> left and right child pointers
+
+- Operations supported:
+  1. Insert a new keyword and meaning
+  2. Delete a keyword
+  3. Update meaning of a keyword
+  4. Display in ascending (inorder) and descending (reverse inorder) order
+  5. Search a keyword and count comparisons
+
+- Insert:
+  -> If tree is empty, new node becomes root
+  -> Otherwise, insert based on key comparison (left if smaller, right if larger)
+  -> Duplicate keys are not allowed
+
+- Delete:
+  -> Search the node to delete
+  -> Three cases:
+     a) No child – delete node
+     b) One child – link child to parent
+     c) Two children – find inorder successor, copy data, delete successor
+
+- Update:
+  -> Search for key
+  -> If found, update meaning
+
+- Search:
+  -> Traverse the tree using key comparison
+  -> Count comparisons while searching
+
+- Inorder Traversal:
+  -> Prints dictionary in ascending order
+  
+- Reverse Inorder:
+  -> Prints dictionary in descending order
+
+- Space complexity for whole tree: O(n) for storing n nodes
+- Extra space used in recursion: O(h) where h is tree height
+*/
+
 */
